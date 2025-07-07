@@ -1,0 +1,5 @@
+7/6/2025
+	1- * create onion architect sample
+--------------
+7/7/2025
+	1- * change layout and loing detecstion

@@ -1,0 +1,3 @@
+ Migration Commmand
+ dotnet ef migrations add Init --project C:\Source\OnionSample\OnionSample\MyApp.Infrastructure --startup-project C:\Source\OnionSample\OnionSample\MyApp.WebAPI
+ dotnet ef database update --project C:\Source\OnionSample\OnionSample\MyApp.Infrastructure --startup-project C:\Source\OnionSample\OnionSample\MyApp.WebAPI

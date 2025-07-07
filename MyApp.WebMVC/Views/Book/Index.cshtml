@@ -1,0 +1,32 @@
+﻿@model List<MyApp.WebMVC.Models.Book>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>My Books</h2>
+        <a asp-action="AddBook" class="btn btn-success mb-3">Add New Book</a>
+        @if (Model.Any())
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Publisher</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var book in Model)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.Publisher</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No books found.</p>
+        }
+    </div>
+</div>
