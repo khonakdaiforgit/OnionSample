@@ -3,3 +3,7 @@
 --------------
 7/7/2025
 	1- * change layout and loing detecstion
+--------------
+7/6/2025
+	1- encapsolation dtos and Automapper
+--------------

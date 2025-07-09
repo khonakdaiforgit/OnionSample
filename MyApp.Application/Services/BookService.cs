@@ -1,4 +1,5 @@
-﻿using MyApp.Application.DTOs;
+﻿using AutoMapper;
+using MyApp.Application.DTOs;
 using MyApp.Application.Interface;
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
@@ -13,21 +14,28 @@ namespace MyApp.Application.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-
-        public BookService(IBookRepository bookRepository)
+        private readonly IMapper _mapper;
+        public BookService(
+            IBookRepository bookRepository,
+            IMapper mapper)
         {
             _bookRepository = bookRepository;
+            _mapper = mapper;
         }
 
         public async Task AddBookAsync(Guid userId, AddBookDto dto)
         {
-            var book = new Book(dto.Title, dto.Publisher, userId);
+            //var book = new Book(dto.Title, dto.Publisher, userId);
+            //await _bookRepository.AddAsync(book);
+            var book = _mapper.Map<Book>(dto);
+            book.UserId = userId;
             await _bookRepository.AddAsync(book);
         }
 
-        public async Task<List<Book>> GetUserBooksAsync(Guid userId)
+        public async Task<List<BookDto>> GetUserBooksAsync(Guid userId)
         {
-            return await _bookRepository.GetBooksByUserIdAsync(userId);
+            var books = await _bookRepository.GetBooksByUserIdAsync(userId);
+            return _mapper.Map<List<BookDto>>(books);
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MyApp.Application.DTOs;
 using MyApp.Application.Interface;
-using MyApp.Application.Services;
-using MyApp.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -44,7 +41,7 @@ public class UserController : ControllerBase
         return Ok(new { token });
     }
 
-    private string GenerateJwtToken(User user)
+    private string GenerateJwtToken(UserDto user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Secret"] ?? "your-very-secure-secret-key");

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MyApp.Application.DTOs;
 using MyApp.Application.Interface;
 using MyApp.Domain.Entities;
@@ -12,10 +13,14 @@ namespace MyApp.WebMVC.Controllers
     public class BookController : Controller
     {
         private readonly HttpClient _httpClient;
+        private readonly IMapper _mapper;
 
-        public BookController(IHttpClientFactory httpClientFactory)
+        public BookController(
+            IHttpClientFactory httpClientFactory,
+            IMapper mapper)
         {
             _httpClient = httpClientFactory.CreateClient("WebApi");
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -34,11 +39,12 @@ namespace MyApp.WebMVC.Controllers
             var response = await _httpClient.GetAsync($"book/{userId}");
             if (response.IsSuccessStatusCode)
             {
-                var books = await response.Content.ReadFromJsonAsync<List<Models.Book>>();
-                return View(books);
+                var books = await response.Content.ReadFromJsonAsync<List<BookDto>>();
+                var viewModels = _mapper.Map<List<BookViewModel>>(books);
+                return View(viewModels);
             }
 
-            return View(new List<Models.Book>());
+            return View(new List<BookDto>());
         }
 
         [HttpGet]

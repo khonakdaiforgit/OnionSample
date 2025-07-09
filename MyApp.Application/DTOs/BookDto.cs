@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyApp.Domain.Entities
+namespace MyApp.Application.DTOs
 {
-    public class Book
+    public class BookDto
     {
         public Guid Id { get;  set; }
         public string Title { get;  set; }
         public string Publisher { get;  set; }
-        public Guid UserId { get;  set; } 
+        public Guid UserId { get;  set; } // ارتباط با کاربر
     }
 }

@@ -1,4 +1,5 @@
-﻿using MyApp.Application.DTOs;
+﻿using AutoMapper;
+using MyApp.Application.DTOs;
 using MyApp.Application.Interface;
 using MyApp.Domain.Entities;
 using MyApp.Domain.Interfaces;
@@ -8,13 +9,17 @@ namespace MyApp.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(
+            IUserRepository userRepository,
+            IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
-        public async Task<User> AuthenticateAsync(LoginDto dto)
+        public async Task<UserDto> AuthenticateAsync(LoginDto dto)
         {
             // پیدا کردن کاربر بر اساس نام کاربری
             var user = await _userRepository.GetByUsernameAsync(dto.Username);
@@ -29,7 +34,7 @@ namespace MyApp.Application.Services
                 return null; // رمز عبور اشتباه
             }
 
-            return user; // کاربر معتبر است
+            return _mapper.Map<UserDto>(user); // کاربر معتبر است
         }
 
         public async Task RegisterUserAsync(RegisterUserDto dto)

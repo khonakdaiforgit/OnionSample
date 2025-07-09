@@ -11,6 +11,6 @@ namespace MyApp.Application.Interface
     public interface IBookService
     {
         Task AddBookAsync(Guid userId, AddBookDto dto);
-        Task<List<Book>> GetUserBooksAsync(Guid userId);
+        Task<List<BookDto>> GetUserBooksAsync(Guid userId);
     }
 }

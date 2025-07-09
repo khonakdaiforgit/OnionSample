@@ -5,6 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(typeof(MyApp.Application.MappingProfile));
+builder.Services.AddAutoMapper(typeof(MyApp.WebMVC.MappingProfile));
+
 // تنظیم HttpClient برای ارتباط با Web API
 builder.Services.AddHttpClient("WebApi", client =>
 {

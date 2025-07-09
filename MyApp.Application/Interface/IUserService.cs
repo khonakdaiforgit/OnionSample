@@ -11,6 +11,6 @@ namespace MyApp.Application.Interface
     public interface IUserService
     {
         Task RegisterUserAsync(RegisterUserDto dto);
-        Task<User> AuthenticateAsync(LoginDto dto); // متد جدید برای احراز هویت
+        Task<UserDto> AuthenticateAsync(LoginDto dto); // متد جدید برای احراز هویت
     }
 }

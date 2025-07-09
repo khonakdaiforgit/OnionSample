@@ -24,6 +24,7 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 
+builder.Services.AddAutoMapper(typeof(MyApp.Application.MappingProfile));
 // تنظیم احراز هویت JWT
 builder.Services.AddAuthentication(options =>
 {
